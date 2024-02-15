@@ -47,7 +47,29 @@ Staff_Responsibility <- Staff_Responsibility %>%
 
 Staff_Basic_Merge <- left_join(Staff_Basic_Merge, Staff_Responsibility)
 
+```
 
+```{r Duplicate to create CAMP_ID_LOCAL from ORG_CD OR CAMP_ID}
+
+Staff_Basic_Merge <- Staff_Basic_Merge %>% 
+  mutate(CAMPUS_ID_LOCAL=substr(CAMP_ID, 7,9))
+
+```
+
+```{R add empty columns to Staff_Basic_Merge}
+
+empty_cols <- c('SVC_CD', 'CLS_STU_CNT', 'CLS_MO_MINS_CNT')
+
+Staff_Basic_Merge[, empty_cols] <- NA
 
 
 ```
+
+
+
+
+
+
+
+
+
