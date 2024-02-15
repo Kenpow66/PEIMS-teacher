@@ -15,3 +15,39 @@ Staff_Payroll <- read.csv("O:/SHARED/PEIMS/TSDS PEIMS Fall 2023-24/Staff-Payroll
 Staff_Payroll_Summary <- read.csv("O:/SHARED/PEIMS/TSDS PEIMS Fall 2023-24/Staff-Employment-Payroll Summary.csv")
 Staff_Responsibility <- read.csv("O:/SHARED/PEIMS/TSDS PEIMS Fall 2023-24/Staff-Responsibility.csv")
 ```
+
+```{r Left_Join Staff_Basic to Staff_Payroll_Summary}
+
+# select only columns that are used for merging
+Staff_Payroll_Summary <- Staff_Payroll_Summary %>% 
+  select("STF_UNQ_ID","AUX_ROLE_CD") %>% 
+  distinct()
+
+Staff_Basic_Merge <- left_join(Staff_Basic, Staff_Payroll_Summary, "STF_UNQ_ID")
+
+```
+
+```{r Left_Join Staff_Basic_merge to Staff-Payroll}
+
+# select only columns that are used for merging
+Staff_Payroll <- Staff_Payroll %>%
+  select("STF_UNQ_ID", "ORG_CD","OBJ_CD") %>% 
+  distinct()
+
+Staff_Basic_Merge <- left_join(Staff_Basic_Merge, Staff_Payroll)
+
+```
+
+```{r Left_Join Staff_Basic_merge to Staff_Responsibility}
+
+# select only columns that are used for merging
+Staff_Responsibility <- Staff_Responsibility %>% 
+  select("STF_UNQ_ID", "ROLE_ID", "CAMP_ID","POP_SERV_CD") %>% 
+  distinct()
+
+Staff_Basic_Merge <- left_join(Staff_Basic_Merge, Staff_Responsibility)
+
+
+
+
+```
